@@ -1,0 +1,316 @@
+# 자바가 확장한 객체지향
+
+작성일자 : 2021-10-01
+
+
+
+## 1. abstract
+
+- 추상 메서드와 추상 클래스
+
+- 추상 클래스는 인스턴스 ,즉 객체를 만들 수 없는 클래스이다.
+
+- 추상클래스는 추상메서드 오버라이딩을 강제한다.
+
+- abstract 키워드 사용시 만날 수 있는 에러메시지
+  Cannot instaniate the type 추상클래스명
+  The type 하위 클래스명 must implement the inherited abstract method 추상클래스.추상메서드명()
+
+  
+
+  > 나의 질문
+  >
+  > - 인터페이스를 사용하지 않고 추상클래스를 사용해야 하는 건 언제일까?? 왜 추상클래스를 사용할까??
+  >
+  >   :  추상클래스는 추상메서드 뿐 만 아니라 일반메서드, 전역변수의 선언도 가능하기 때문에 상속을 통해 멤버를 전달해야 하고 메서드 구현 강제가 동시에 필요할때 사용한다.
+  >   
+  >   
+  >
+  >   구현하는 방법에 따라서 인터페이스만으로도 충분히 구현이 가능하다. 하지만 인터페이스를 사용하면 반드시 public 으로 열어야 하는 단점이 존재한다. 대신에 추상클래스를 사용하면 그 부분을protected 혹은 default등 외부에서 접근할 수 없도록 조절할 수 있다.
+  >
+  >   또한, 하위 클래스에서 상위 클래스가 제공하는 여러 기능들을 사용할 수 있는 장점이 생긴다. 메소드의 재정의로 상위 클래스의 행동을 살짝 변경 할 수도 있다.
+  >
+  >   (요 부분 출처 : https://okky.kr/article/887333?note=2263616 )
+  >
+  > - 오버라이딩 강제, 멤버 상속 두가지가 필요한 상황은 언제일까??
+
+
+
+***
+
+
+
+## 2.생성자
+
+- new 키워드 사용
+
+- 아무런 인자도 갖지 않는 기본 생성자 메서드는 자바 컴파일러가 자동으로 생성시킨다.
+
+- 인자가 있는 생성자를 하나라도 만든 다면 자바는 기본생성자를 만들어  주지 않는다.
+
+
+  >나의 질문
+  >
+  >- 인자가 있는 생성자는 언제 사용 할까??
+  >  : 객체 생성시 필드의 초기화를 위해서 사용한다.
+  >
+  >  필드를 선언할 때 초기값을 주게되면 동일한 클래스로부터 생성되는 객체들은 몯같은 값을 갖게 된다. 객체 생성 후에 변경할 수 있지만 객체 생성시점에는 다 동일하다.
+  >
+  >  객체 생성 시점에서 외부에서 제공하는 값으로 초기화 해야한다면 생성자에서 매개변수를 통해 초기화 해야한다.  
+  >
+  >  read only 클래스의 경우 생성자에 인자를 입력해서 객체를 생성할때 속성에 처음이자 마지막 초기화가 가능하도록 할 수 있다.
+
+
+
+---
+
+
+
+## 3. static 블록
+
+- 클래스 생성시 실행 블록
+
+- static 블록이 선언된 클래스를 사용할때 자바 메모리의 static영역에 배치가 이뤄지고 이때 ststic블록이 실행된다.
+
+- static 블록에서 사용할수 있는 속성과 메서드는 static 멤버 뿐이다.
+
+  
+
+예시코드
+
+``` java
+public class StaticBlockClass{
+    static{
+        System.out.println("StaticBlockClass 클래스의 staic블록 실행");
+    }
+}
+public class Driver{
+    public static void main(Strin[] args){
+        System.out.println("main 메서드 실행!!");
+        
+        StaticBlockClass staticBlockClass = new StaticBlockClass ();
+    }
+}
+```
+
+
+
+``` 
+[실행결과]
+
+main 메서드 실행!!
+StaticBlockClass 클래스의 staic블록 실행"
+```
+
+
+
+- StaticBlockClass 클래스의 인스턴스를 여러개 입력해도 StaticBlockClass 클래스내 static 블록은 한번만 실행된다.
+- StaticBlockClass 클래스 내 정적 속성에 접근할때도 static 블록이 실행된다.
+- staic 블록의 실행
+  - 클래스의 정적속성을 사용할때
+  - 클래스의 정적메서드를 사용할때
+  - 클래스의 인스턴스를 최초로 만들때
+
+
+
+
+
+
+
+---
+
+
+
+## 4. final 키워드
+
+- 상수로 초기화 이후 수정이 불가하다.
+- final 클래스 : 상속 불가
+- final 메서드 : 오버라이딩 불가
+- final 변수
+  - 값 변경 불가 (재 초기화)
+  - 정적 상수 : 선언시, 정적 생성자에 해당하는 static 블록 내부에서 초기화 가능
+  - 객체 상수 : 선언시, 객체 생성자 또는 인스턴스 블록에서 초기화
+  - 지역 상수 : 선언시, 최초 한번 초기화 가능                     
+
+
+
+---
+
+
+
+## 5. instanceof 키워드
+
+- 객체가 특정 클래스의 인스턴스인지 물어보는 연산자
+
+- true or false 반환
+
+- 사용 방법
+
+  ```java 
+  객체참조변수 insetanceof 클래스명
+  ```
+
+- 예시 코드 
+
+```java
+public class 동물 {
+}
+
+public class 조류 extends 동물{	
+}
+
+
+public class 펭귄 extends 조류 {
+}
+  
+
+public class Driver {
+	public static void main(String[] args) {
+		동물 동물객체 = new 동물();
+		동물 조류객체 = new 조류();
+		동물 펭귄객체 = new 펭귄();	
+        
+		System.out.println(동물객체 instanceof 동물);
+		
+		System.out.println(조류객체 instanceof 동물);
+		System.out.println(조류객체 instanceof 조류);
+		
+		System.out.println(펭귄객체 instanceof 동물);
+		System.out.println(펭귄객체 instanceof 조류);
+		System.out.println(펭귄객체 instanceof 펭귄);
+		
+		System.out.println(펭귄객체 instanceof Object);	
+        
+
+```
+
+- >나의 질문 
+  >
+  >- 결과가 모두 true가 나오는데 그렇다면 동물타입  배열안에 동물, 조류, 펭귄 객체를 어떻게 구별해서 처리 할 수 있을까?
+  >
+  >  :  하위 클래스타입먼저 조건처리를 해서 점점 상위 객체로 범위를 넓혀서 조건처리를 하면 타입에 따라 처리가 가능하다.
+
+
+
+```java
+		
+		if(펭귄객체 instanceof  펭귄) {
+			System.out.println("펭귄객체는 펭귄 타입입니다.");
+		}else if(펭귄객체 instanceof  조류) {
+			System.out.println("펭귄객체는 조류 타입입니다.");
+			
+		}else {
+			System.out.println("펭귄객체는 동물 타입입니다.");
+		}
+
+		
+		if(조류객체 instanceof  펭귄) {
+			System.out.println("조류객체는 펭귄 타입입니다.");
+		}else if(조류객체 instanceof  조류) {
+			System.out.println("조류객체는 조류 타입입니다.");
+			
+		}else {
+			System.out.println("조류객체는 동물 타입입니다.");
+		}
+
+		
+		if(동물객체 instanceof  펭귄) {
+			System.out.println("동물객체는 펭귄 타입입니다.");
+		}else if(동물객체 instanceof  조류) {
+			System.out.println("동물객체는 조류 타입입니다.");
+			
+		}else {
+			System.out.println("동물객체는 동물 타입입니다.");
+		}	
+	}
+}
+```
+
+
+
+
+
+---
+
+
+
+## 6. interface와 implements 
+
+- 인터페이스는 추상메서드와 정적 상수만 가질 수 있다.
+  (메서드에 public abstract, 속성에 public static final 을 자동으로 붙여준다) 
+- 인터페이스에서 정적 상수인 증거 
+  - interface 속성에 다시 초기화 불가 => final 키워드
+  - 정적 상수 호출 시 클래스명.속성명 으로 호출하는데 interface의 속성도 interface명.속성명으로 접근 가능 
+
+- java 8 버전 이후 default 메서드 사용가능 
+  - 하위 호환성 보완
+  - 기존 인터페이스에 default메서드 추가가능 (일반 메서드에 default 키워드 붙은 형태) 
+
+
+
+- 람다 
+  - 람다 표현식은 interface에 기초하고 있다.
+  - 인터페이스의 메서드가 하나일 경우 사용, 익명함수를 람다표현식으로 전환 가능
+  - 변수에 저장할 수 있는 로직이다.
+
+
+
+---
+
+
+
+## *7. this 키워드*
+
+- this는 객체가 자기 자신을 지칭할 때 쓰는 키워드
+
+- 지역변수와 속성(객체변수, 정적변수)의 이름이 같을 경우 지역변수가 우선이다.
+
+- 객체변수와 지역변수의 이름이 같을 경우, 객체변수를 호출하려면 this 키워드를 접두사로 사용한다.
+
+- 정적변수와 지역변수의 이름이 같을 경우, 정적변수를 호출하려면 ''클래스명.속성명''으로 호출한다.
+
+- 메모리 사용 측면에서 변수 호출 확인하기
+
+  예시 코드 
+
+  ```java
+  class 펭귄{
+      int var = 10;
+      
+      
+      void test(){
+          System.out.println(var);
+          System.out.println(this.var);
+      }
+  }
+  
+  public class Driver{
+      public static void main(String[] args){
+          펭귄 뽀로로 = new 펭귄();
+          뽀로로.test();
+      }
+  }
+  ```
+
+  
+
+
+
+<img src="C:\Users\user\AppData\Roaming\Typora\typora-user-images\image-20211001232120428.png" alt="image-20211001232120428" style="zoom:40%;" />
+
+
+
+
+
+```java
+System.out.println("1 - " + var);
+System.out.println("2 - " + this.var);
+System.out.println("3 - " + 펭귄.var);
+```
+
+
+
+
+
+
+
