@@ -254,7 +254,8 @@ public class CarTest {
 
 
 
-![image-20211009142636420](C:\Users\user\AppData\Roaming\Typora\typora-user-images\image-20211009142636420.png)
+![20211010_184146](https://user-images.githubusercontent.com/56250078/136690540-10a7d666-59cd-4705-bc29-d8c8e2e1b806.png)
+
 
 
 
