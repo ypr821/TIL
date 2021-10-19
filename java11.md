@@ -17,7 +17,9 @@
 
 - ZGC: A Scalable Low-Latency Garbage Collector (Experimental) 새로운 GC를 추가했습니다.
   JVM의 GC가 동작할 때 가장 큰 부담은 애플리케이션이 멈추는 Stop-The-World 현상입니다.
-  ZGC는 Load barrier와 Colored object pointer를 함께 사용함으로써 이에 대한 부담을 줄여준다고 한다.
+  ZGC는 Load barrier와 Colored object pointer를 함께 사용함으로써 이에 대한 부담을 줄여줍니다.
+
+  GC에 관한 공부내용  : https://github.com/ypr821/TIL/blob/main/2021_10/GC(Garbage_Collection).md
 
 - Nest 기반 액세스 제어할 수 있습니다.
   Java SE 11에서 Java Virtual Machine은 클래스 및 인터페이스를 *nest* 라고 하는 새로운 액세스 제어 컨텍스트로 배열하는 것을 지원합니다.
