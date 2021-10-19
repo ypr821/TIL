@@ -125,9 +125,31 @@
 <img width="355" alt="20211015_195350" src="https://user-images.githubusercontent.com/56250078/137476462-e03c5502-e4ec-4652-9ae9-6942708ef8b9.png">
 
 
+Default garbage collectors:
+
+Java 7 - Parallel GC
+Java 8 - Parallel GC
+Java 9 - G1 GC
+Java 10 - G1 GC
 
 <br><br>
+java11에 나온 GC이며, 아래의 목표를 충족하기 위해 설계된 확장 가능하고 낮은 지연율(low latency)을 가진 GC이다.
 
+정지 시간이 최대 10ms를 초과하지 않음
+Heap의 크기가 증가하더라도 정지 시간이 증가하지 않음
+8MB~16TB에 이르는 다양한 범위의 Heap 처리 가능
 
+ZGC는 ZPages라는 G1 GC의 Region과 비슷한 영역의 개념을 사용하지만, Region은 고정된 크기인 것에 반해 ZPages는 크기가 2MB의 배수로 동적으로 생성 및 삭제될 수 있다.
 
-참고 : https://www.youtube.com/watch?v=Fe3TVCEJhzo
+중요 포인트
+
+ZGC Heap은 다양한 사이즈의 영역이 여러 개 발생할 수 있다.
+ZGC가 compaction된 후, ZPage는 ZPageCache라고 불리는 캐시에 삽입된다.
+캐시 안의 Zpage는 새로운 Heap 할당을 위해 재사용할 준비를 한다.
+메모리를 커밋과 커밋하지 않는 작업은 매우 비싼 작업이므로 캐시의 성능에 중요한 영향을 끼친다.
+
+<br>
+
+참고 
+https://www.youtube.com/watch?v=Fe3TVCEJhzo
+https://velog.io/@hygoogi/%EC%9E%90%EB%B0%94-GC%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C
