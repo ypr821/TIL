@@ -1,3 +1,10 @@
+
+# BeanFactory와ApplicationContext
+<br>
+작성일자 : 2021-10-21<br>
+내용 : 스프링 프레임워크 핵심 기술(인프런 강의)
+
+<br><br>
 ## Interface BeanFactory
 
 <br>
@@ -16,27 +23,25 @@ The point of this approach is that the BeanFactory is a central registry of appl
 
 Inversion of Control: 의존 관계 주입(Dependency Injection)이라고도 하며, 어떤 객체가 사용하는 의존 객체를 직접 만들어 사용하는게 아니라, 주입 받아 사용하는 방법을 말 함. 
 
-스프링 IoC 컨테이너
+### **스프링 IoC 컨테이너**
 
-​	● BeanFactory 
+● BeanFactory 
 
-​	● 애플리케이션 컴포넌트의 중앙 저장소.
+- 애플리케이션 컴포넌트의 중앙 저장소.
 
-​	● 빈 설정 소스로 부터 빈 정의를 읽어들이고, 빈을 구성하고 제공한다. 
+● 빈 설정 소스로 부터 빈 정의를 읽어들이고, 빈을 구성하고 제공한다. 
 
-빈 
+### **빈** 
 
-​	●스프링 IoC 컨테이너가 관리 하는 객체.
+●스프링 IoC 컨테이너가 관리 하는 객체.
 
-​	● 장점
-​		○ 의존성 관리
-​		○ 스코프 
+● 장점
+- 의존성 관리
+- 스코프 
+- 싱글톤: 하나
+- 프로포토타입: 매번 다른 객체
 
-​			■ 싱글톤: 하나
-
-​			■ 프로포토타입: 매번 다른 객체
-
-​		○ 라이프사이클 인터페이스
+○ 라이프사이클 인터페이스
 
 <br>
 
@@ -283,7 +288,7 @@ public class InflearnB2Application {
 
 
 
-### BeanFactory와 ApplicationContext 차이점
+## BeanFactory와 ApplicationContext 차이점
 
 - **BeanFactroy는 pre-loading(사전로딩) 방식**이라는 것이다.
 
