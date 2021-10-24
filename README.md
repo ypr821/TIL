@@ -27,9 +27,11 @@
 ## **Spring**
 > - [스프링 삼각형과 설정정보.1 - IoC/DI](./2021_10/IoC_DI.md)
 > - [스프링 삼각형과 설정정보.2 - AOP](./2021_10/AOP.md)
-> - [@Autowired](./2021_10/@Autowired_연습.md)
+> - [@Autowired_1](./2021_10/@Autowired_1.md)
+> - [@Autowired_2](./2021_10/@Autowired_2.md)
 > - [빈(bean)](./2021_10/빈(Bean).md)
 > - [BeanFactory와ApplicationContext](./2021_10/BeanFactory와ApplicationContext.md)
+> - [@Component와_@ComponentScan](./2021_10/@Component와_@ComponentScan.md)
 
 
 
