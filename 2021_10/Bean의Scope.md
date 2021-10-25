@@ -388,5 +388,6 @@ com.inflearnb.spring512.Proto@240447bb
   - @Scope(value = "prototype", proxyMode = ScopedProxyMode.TARGET_CLASS) 추가
   - ObjectProvider사용하기
 <br>
+
 #### 느낀점
 - Proxy가 프로토타입의 클래스를 상속받아서 Single클래스가 Proxy를 거쳐갈때 타입에 문제없도록 한 게  신기하다. 빈에대해 더 깊게 알 수 있었다.
