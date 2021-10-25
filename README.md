@@ -30,6 +30,7 @@
 > - [@Autowired_1](./2021_10/@Autowired_1.md)
 > - [@Autowired_2](./2021_10/@Autowired_2.md)
 > - [빈(bean)](./2021_10/빈(Bean).md)
+> - [Bean의Scope)](./2021_10/Bean의Scope.md)
 > - [BeanFactory와ApplicationContext](./2021_10/BeanFactory와ApplicationContext.md)
 > - [@Component와_@ComponentScan](./2021_10/@Component와_@ComponentScan.md)
 
