@@ -12,15 +12,27 @@
 
 ApplicationContext interface는 많은 interface를 구현하고 있다.  
 
-- 예: EnvironmentCapable, ListableBeanFactory, HierarchicalBeanFactory, MessageSource, ApplicationEventPublisher, ResourcePatternResolver
+- 예: ***EnvironmentCapable***, ListableBeanFactory, HierarchicalBeanFactory, MessageSource, ApplicationEventPublisher, ResourcePatternResolver
 
 <br>
 
-그 중 **EnvironmentCapable**을 살펴보자
+그 중 ***EnvironmentCapable***을 살펴보자
 
-ApplicationContext extends [EnvironmentCapable](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/core/env/EnvironmentCapable.html) 
 
+```java
+package org.springframework.core.env;
+
+public interface EnvironmentCapable {
+  Environment getEnvironment();
+}
+```
 **getEnvironment()** 를 호출해서 Environment를 가져올 수 있다.
+
+ApplicationContext에 관한 설명을 보면 "Methods inherited from interface org.springframework.core.env.[EnvironmentCapable](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/core/env/EnvironmentCapable.html)" 라고도 확인할 수 있다.
+
+출처 : https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/ApplicationContext.html
+
+ApplicationContext은 EnvironmentCapable 인터페이스를 상속하기 때문에 Environment 타입의 결과값을 리턴하는 메서드인 getEnvironment()메서드 구현이 강제된다. 
 
 <br><br>
 
@@ -32,19 +44,73 @@ ApplicationContext extends [EnvironmentCapable](https://docs.spring.io/spring-fr
 
 - [Environment](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/core/env/EnvironmentCapable.html) interface의 역할은 활성화할 프로파일 확인 및 설정
 
-```java
-package org.springframework.core.env;
+<br>
 
-public interface EnvironmentCapable {
-  Environment getEnvironment();
-}
-
-
-```
-
-  <br>
+  
 
 - default라는 이름의 프로파일 : 항상 아무런 프로파일 설정이 없어도 적용되는 프로파일
+
+<br><br>
+
+> 나의 질문 : "Environment" 이 인터페이스는 뭘까?
+>
+> ```java
+> package org.springframework.core.env;
+> 
+> public interface Environment extends PropertyResolver {
+>   String[] getActiveProfiles();
+> 
+>   String[] getDefaultProfiles();
+> 
+>   /** @deprecated */
+>   @Deprecated
+>   boolean acceptsProfiles(String... profiles);
+> 
+>   boolean acceptsProfiles(Profiles profiles);
+> }
+> ```
+>
+> <br>
+>
+> ## Interface Environment
+>
+>   - All Superinterfaces:
+>
+>     [PropertyResolver](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/core/env/PropertyResolver.html)
+>
+>   - All Known Subinterfaces:
+>
+>     [ConfigurableEnvironment](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/core/env/ConfigurableEnvironment.html), [ConfigurableWebEnvironment](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/context/ConfigurableWebEnvironment.html)
+>
+>  
+>   ------
+>   <br>
+>
+>   ```
+>   public interface Environment
+>   extends PropertyResolver
+>   ```
+>  
+>   > **Interface representing the environment in which the current application is running. Models two key aspects of the application environment: *profiles* and *properties*. Methods related to property access are exposed via the [`PropertyResolver`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/core/env/PropertyResolver.html) superinterface.** 
+>   >
+>   > A ***profile*** is a named, logical group of bean definitions to be registered with the container only if the given profile is *active*. Beans may be assigned to a profile whether defined in XML or via annotations 
+>   >
+>   > ***Properties*** play an important role in almost all applications, and may originate from a variety of sources: properties files, JVM system properties, system environment variables, JNDI, servlet context parameters, ad-hoc Properties objects, Maps, and so on. 
+>
+> <br>
+>
+> 출처 : https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/core/env/Environment.html
+>
+> <br><br>
+>
+>  -  나의 정리 : Interface Environment는 profile과 Properties를 통해 실행중인 환경을 나타내는 인터페이스이다. 위에 선언된 profile관련 메서드 뿐만 아니라 PropertyResolver상속을 통해
+> containsProperty(String key), getProperty(String key) 등의 속성관련 메서드로 속성을 확인 할 수 있다.
+>
+> 
+
+
+
+
 
 <br><br>
 
