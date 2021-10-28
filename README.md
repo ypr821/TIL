@@ -33,6 +33,8 @@
 > - [Bean의Scope)](./2021_10/Bean의Scope.md)
 > - [BeanFactory와ApplicationContext](./2021_10/BeanFactory와ApplicationContext.md)
 > - [@Component와_@ComponentScan](./2021_10/@Component와_@ComponentScan.md)
+> - [Environment_1부_프로파일](./2021_10/Environment_1부_프로파일.md)
+
 
 
 
