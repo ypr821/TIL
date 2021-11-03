@@ -14,7 +14,7 @@
 
 ![collection 시간복잡도](https://user-images.githubusercontent.com/56250078/140063270-d233e43a-ac76-463e-8715-e921ae61bd54.png)
 
-출처: https://bcp0109.tistory.com/67
+사진출처: https://bcp0109.tistory.com/67
 
 <br>
 <br>
