@@ -27,9 +27,9 @@
 
 ## Validator 인터페이스
 
-- boolean **supports**(Class clazz): 어떤 타입의 객체를 검증할 때 사용할 것인지 결정함
-- void **validate**(Object obj, Errors e): 실제 검증 로직을 이 안에서 구현
-  - 구현할 때 ValidationUtils 사용하며 편리 함. 
+- boolean **supports**(Class clazz): 어떤 타입의 객체를 검증할 때 사용할 것인지 결정한다.
+- void **validate**(Object obj, Errors e): 실제 검증 로직을 이 안에서 구현한다.
+  - 구현할 때 ValidationUtils 사용하며 편리. 
 
 ```java
 public class UserLoginValidator implements Validator {
@@ -325,7 +325,7 @@ Email
 
 ```
 
-default메시지는 validator 인터페이스가 자동생성 해 준다.
+default메시지는 validator 인터페이스가 자동 생성 해준다.
 
 오 신기하다.
 
