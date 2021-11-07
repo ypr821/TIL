@@ -23,6 +23,7 @@
 > - [자바가 확장한 객체 지향](./2021_10/자바가_확장한_객체지향.md)
 > - [GC (Garbage Collection)](./2021_10/GC(Garbage_Collection).md)
 > - [java11](./2021_10/java11.md)
+> - [Collection_궁금해결](./2021_11/Collection_궁금해결.md)
 
 ## **Spring**
 > - [스프링 삼각형과 설정정보.1 - IoC/DI](./2021_10/IoC_DI.md)
@@ -36,11 +37,14 @@
 > - [Environment_1부_프로파일](./2021_10/Environment_1부_프로파일.md)
 > - [Environment_2부_프로퍼티](./2021_10/Environment_2부_프로퍼티.md)
 > - [ApplicationEventPublisher](./2021_10/ApplicationEventPublisher.md)
-
-
+> - [ResourceLoader](./2021_10/ResourceLoader.md)
+> - [Resource_추상화](./2021_11/Resource_추상화.md)
+> - [Validation_추상화](./2021_11/Validation_추상화.md)
+> - [데이터바인딩추상화Converter와Formatter](./2021_11/데이터바인딩추상화Converter와Formatter.md)
 
 
 ## **자유로운 오늘 질문**
 > - [질문_2021_10_05](./2021_10/질문_2021_10_05.md)
 > - [질문_2021_10_12](./2021_10/질문_2021_10_12.md)
 > - [SpringAOP질문_2021_10_20](./2021_10/SpringAOP질문_2021_10_20.md)
+> - [Restful_API_초읽기](./2021_11/Restful_API_초읽기.md)
