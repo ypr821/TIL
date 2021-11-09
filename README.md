@@ -24,6 +24,7 @@
 > - [GC (Garbage Collection)](./2021_10/GC(Garbage_Collection).md)
 > - [java11](./2021_10/java11.md)
 > - [Collection_궁금해결](./2021_11/Collection_궁금해결.md)
+> - [자바프로그램_실행과정](./2021_11/자바프로그램_실행과정.md)
 
 ## **Spring**
 > - [스프링 삼각형과 설정정보.1 - IoC/DI](./2021_10/IoC_DI.md)
