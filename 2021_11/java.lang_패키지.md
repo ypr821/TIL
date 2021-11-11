@@ -104,7 +104,7 @@ public class Test {
 
 ## 각종 정보를 확인하기 위한 System 클래스
 
-
+System 저어보를 확인하는 클래스이다.
 
 System 클래스는 생성자가 없고 err, in, out 3개의 static 변수가 선언되있다.
 
