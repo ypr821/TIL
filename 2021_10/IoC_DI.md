@@ -618,10 +618,7 @@ public class Car {
   |소속 패키지|org.springframework.beans.<br />factory.annotation.Autowired | javax.annotation.Resource|
   |빈 검색 방식|byType먼저, 못 찾으면 byName|byName먼저, 못 찾으면 byType|
   |byName강제하기|@Autowired<br />@Qualifier("tire1")|@Resource(name="tire1")|
-  
-  [**@Autowired와 @Resource 구분을 자세히 공부한 링크**](https://github.com/ypr821/TIL/blob/main/2021_10/%40Autowired%EC%99%80_%40Resource_%EA%B5%AC%EB%B6%84.md)
-  
-  
+ 
   
   
 
