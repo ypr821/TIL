@@ -71,6 +71,11 @@ Gradle: org.springframework.boot:spring-boot-autoconfigure:2.5.6 이 곳도 뒤�
 <br>
 
 > 나의질문 : H2ConsoleAutoConfiguration 이 클래스가 h2를 자동 설정해주는 로직을 가지고있고 @EnableAutoConfiguration을 통해 자동 등록되는건가..??
+>
+> 답 : H2ConsoleAutoConfiguration은 사용자가 접근할 수 있는 콘솔 interface를 제공하는 것에 대한 자동 설정이고
+> srping boot에서 자동 설정해주는 곳은 **Auto Configure 클래스**에 조건에 따라 자동으로 설정된다.
+> 그리고 실제 h2 DB드라이버를 자동으로 불러오는 것은 **DataSourceAutoConfiguration클래스**이다.
+
 
 ```java
 /*
@@ -89,82 +94,156 @@ Gradle: org.springframework.boot:spring-boot-autoconfigure:2.5.6 이 곳도 뒤�
  * limitations under the License.
  */
 
-package org.springframework.boot.autoconfigure.h2;
-
-import java.sql.Connection;
+package org.springframework.boot.autoconfigure.jdbc;
 
 import javax.sql.DataSource;
+import javax.sql.XADataSource;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.h2.server.web.WebServlet;
-
-import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.AnyNestedCondition;
+import org.springframework.boot.autoconfigure.condition.ConditionMessage;
+import org.springframework.boot.autoconfigure.condition.ConditionOutcome;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication.Type;
-import org.springframework.boot.autoconfigure.h2.H2ConsoleProperties.Settings;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.SpringBootCondition;
+import org.springframework.boot.autoconfigure.jdbc.metadata.DataSourcePoolMetadataProvidersConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.boot.web.servlet.ServletRegistrationBean;
-import org.springframework.context.annotation.Bean;
+import org.springframework.boot.jdbc.DataSourceBuilder;
+import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
+import org.springframework.context.annotation.Condition;
+import org.springframework.context.annotation.ConditionContext;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.core.env.Environment;
+import org.springframework.core.type.AnnotatedTypeMetadata;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.util.StringUtils;
 
 /**
- * {@link EnableAutoConfiguration Auto-configuration} for H2's web console.
+ * {@link EnableAutoConfiguration Auto-configuration} for {@link DataSource}.
  *
- * @author Andy Wilkinson
- * @author Marten Deinum
+ * @author Dave Syer
+ * @author Phillip Webb
  * @author Stephane Nicoll
- * @since 1.3.0
+ * @author Kazuki Shimizu
+ * @since 1.0.0
  */
+@SuppressWarnings("deprecation")
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnWebApplication(type = Type.SERVLET)
-@ConditionalOnClass(WebServlet.class)
-@ConditionalOnProperty(prefix = "spring.h2.console", name = "enabled", havingValue = "true")
-@AutoConfigureAfter(DataSourceAutoConfiguration.class)
-@EnableConfigurationProperties(H2ConsoleProperties.class)
-public class H2ConsoleAutoConfiguration {
+@ConditionalOnClass({ DataSource.class, EmbeddedDatabaseType.class })
+@ConditionalOnMissingBean(type = "io.r2dbc.spi.ConnectionFactory")
+@EnableConfigurationProperties(DataSourceProperties.class)
+@Import({ DataSourcePoolMetadataProvidersConfiguration.class,
+		DataSourceInitializationConfiguration.InitializationSpecificCredentialsDataSourceInitializationConfiguration.class,
+		DataSourceInitializationConfiguration.SharedCredentialsDataSourceInitializationConfiguration.class })
+public class DataSourceAutoConfiguration {
 
-	private static final Log logger = LogFactory.getLog(H2ConsoleAutoConfiguration.class);
+	@Configuration(proxyBeanMethods = false)
+	@Conditional(EmbeddedDatabaseCondition.class)
+	@ConditionalOnMissingBean({ DataSource.class, XADataSource.class })
+	@Import(EmbeddedDataSourceConfiguration.class)
+	protected static class EmbeddedDatabaseConfiguration {
 
-	@Bean
-	public ServletRegistrationBean<WebServlet> h2Console(H2ConsoleProperties properties,
-			ObjectProvider<DataSource> dataSource) {
-		String path = properties.getPath();
-		String urlMapping = path + (path.endsWith("/") ? "*" : "/*");
-		ServletRegistrationBean<WebServlet> registration = new ServletRegistrationBean<>(new WebServlet(), urlMapping);
-		configureH2ConsoleSettings(registration, properties.getSettings());
-		dataSource.ifAvailable((available) -> {
-			try (Connection connection = available.getConnection()) {
-				logger.info("H2 console available at '" + path + "'. Database available at '"
-						+ connection.getMetaData().getURL() + "'");
-			}
-			catch (Exception ex) {
-				// Continue
-			}
-		});
-		return registration;
 	}
 
-	private void configureH2ConsoleSettings(ServletRegistrationBean<WebServlet> registration, Settings settings) {
-		if (settings.isTrace()) {
-			registration.addInitParameter("trace", "");
+	@Configuration(proxyBeanMethods = false)
+	@Conditional(PooledDataSourceCondition.class)
+	@ConditionalOnMissingBean({ DataSource.class, XADataSource.class })
+	@Import({ DataSourceConfiguration.Hikari.class, DataSourceConfiguration.Tomcat.class,
+			DataSourceConfiguration.Dbcp2.class, DataSourceConfiguration.OracleUcp.class,
+			DataSourceConfiguration.Generic.class, DataSourceJmxConfiguration.class })
+	protected static class PooledDataSourceConfiguration {
+
+	}
+
+	/**
+	 * {@link AnyNestedCondition} that checks that either {@code spring.datasource.type}
+	 * is set or {@link PooledDataSourceAvailableCondition} applies.
+	 */
+	static class PooledDataSourceCondition extends AnyNestedCondition {
+
+		PooledDataSourceCondition() {
+			super(ConfigurationPhase.PARSE_CONFIGURATION);
 		}
-		if (settings.isWebAllowOthers()) {
-			registration.addInitParameter("webAllowOthers", "");
+
+		@ConditionalOnProperty(prefix = "spring.datasource", name = "type")
+		static class ExplicitType {
+
 		}
-		if (settings.getWebAdminPassword() != null) {
-			registration.addInitParameter("webAdminPassword", settings.getWebAdminPassword());
+
+		@Conditional(PooledDataSourceAvailableCondition.class)
+		static class PooledDataSourceAvailable {
+
 		}
+
+	}
+
+	/**
+	 * {@link Condition} to test if a supported connection pool is available.
+	 */
+	static class PooledDataSourceAvailableCondition extends SpringBootCondition {
+
+		@Override
+		public ConditionOutcome getMatchOutcome(ConditionContext context, AnnotatedTypeMetadata metadata) {
+			ConditionMessage.Builder message = ConditionMessage.forCondition("PooledDataSource");
+			if (DataSourceBuilder.findType(context.getClassLoader()) != null) {
+				return ConditionOutcome.match(message.foundExactly("supported DataSource"));
+			}
+			return ConditionOutcome.noMatch(message.didNotFind("supported DataSource").atAll());
+		}
+
+	}
+
+	/**
+	 * {@link Condition} to detect when an embedded {@link DataSource} type can be used.
+	 * If a pooled {@link DataSource} is available, it will always be preferred to an
+	 * {@code EmbeddedDatabase}.
+	 */
+	static class EmbeddedDatabaseCondition extends SpringBootCondition {
+
+		private static final String DATASOURCE_URL_PROPERTY = "spring.datasource.url";
+
+		private final SpringBootCondition pooledCondition = new PooledDataSourceCondition();
+
+		@Override
+		public ConditionOutcome getMatchOutcome(ConditionContext context, AnnotatedTypeMetadata metadata) {
+			ConditionMessage.Builder message = ConditionMessage.forCondition("EmbeddedDataSource");
+			if (hasDataSourceUrlProperty(context)) {
+				return ConditionOutcome.noMatch(message.because(DATASOURCE_URL_PROPERTY + " is set"));
+			}
+			if (anyMatches(context, metadata, this.pooledCondition)) {
+				return ConditionOutcome.noMatch(message.foundExactly("supported pooled data source"));
+			}
+			EmbeddedDatabaseType type = EmbeddedDatabaseConnection.get(context.getClassLoader()).getType();
+			if (type == null) {
+				return ConditionOutcome.noMatch(message.didNotFind("embedded database").atAll());
+			}
+			return ConditionOutcome.match(message.found("embedded database").items(type));
+		}
+
+		private boolean hasDataSourceUrlProperty(ConditionContext context) {
+			Environment environment = context.getEnvironment();
+			if (environment.containsProperty(DATASOURCE_URL_PROPERTY)) {
+				try {
+					return StringUtils.hasText(environment.getProperty(DATASOURCE_URL_PROPERTY));
+				}
+				catch (IllegalArgumentException ex) {
+					// Ignore unresolvable placeholder errors
+				}
+			}
+			return false;
+		}
+
 	}
 
 }
 
+
 ```
+
+https://github.com/spring-projects/spring-boot/blob/v2.6.0/spring-boot-project/spring-boot-autoconfigure/src/main/java/org/springframework/boot/autoconfigure/jdbc/DataSourceAutoConfiguration.java
 
 <br><br>
 
@@ -173,6 +252,7 @@ public class H2ConsoleAutoConfiguration {
 - META-INF/spring.factories
   - 자동 설정 타깃 클래스 목록
   - 이곳에 선언된 클래스들이 @EnableConfiguration 사용 시 자동 설정 타깃이 된다.
+  - 하위에 AutoConfigurations클래스가 있다.
 - META-INF/spring-configuration-matadata.json
   - 자동 설정에 사용할 프로퍼티 정의 파일
   - 미리 구현되어 있는 자동 설정에 프로퍼티만 주입시켜주면 된다.
