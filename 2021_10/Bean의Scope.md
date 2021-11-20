@@ -97,10 +97,10 @@ com.inflearnb.spring512.Proto@240447bb
 - 요청이 오면 항상 새로운 인스턴스를 생성하여 반환하고 이후에 관리하지 않음
 - 프로토타입을 받은 클라이언트가 객체를 관리해야 한다.
 <br>
-- Request :각각의 요청이 들어오고 나갈때가지 유지되는 스코프
-- Session : 세션이 생성되고 종료될 때 까지 유지되는 스코프
-- WebSocket 
-- application: 웹의 서블릿 컨텍스트와 같은 범위로 유지되는 스코프
+- Request :각각의 요청이 들어오고 나갈때가지 유지되는 스코프<br>
+- Session : 세션이 생성되고 종료될 때 까지 유지되는 스코프<br>
+- WebSocket <br>
+- application: 웹의 서블릿 컨텍스트와 같은 범위로 유지되는 스코프<br>
 - ...
 
 출처: https://mangkyu.tistory.com/117 [MangKyu's Diary]
@@ -287,7 +287,14 @@ com.inflearnb.spring512.Proto@240447bb
 
     Proto.java
 
-    - @Component @Scope(value = "prototype", proxyMode = ScopedProxyMode.TARGET_CLASS) 추가
+    - @Component @Scope(value = "prototype", proxyMode = ScopedProxyMode.TARGET_CLASS) 추가<br>
+     (CG 라이브러리를 사용한 웹프록시를 사용)
+     클래스기반의 프록시로 감싼다 그리고 감싼 그 프록시 빈을 쓰게한다. 
+     왜 감싸야 하느냐 다른 빈들이 직접 참조 하면 안되고 바꿔줄 여지가 없기때문이다. 
+     프록시를 거쳐서 참조하도록 해야 상속받은 프록시가 인스턴스가 계속 생성될 수 있도록 함. 
+     프록시 빈을 주입
+     
+     TARGET_CLASS대신 INTERFACE도 설정가능
 
     ```java
     package com.inflearnb.spring512;
@@ -390,4 +397,4 @@ com.inflearnb.spring512.Proto@240447bb
 <br>
 
 #### 느낀점
-- Proxy가 프로토타입의 클래스를 상속받아서 Single클래스가 Proxy를 거쳐갈때 타입에 문제없도록 한 게  신기하다. 빈에대해 더 깊게 알 수 있었다.
+- Proxy가 프로토타입의 클래스를 상속받아서 Single클래스가 Proxy를 거쳐갈때 타입에 문제없도록 한 게 신기하다. 빈에대해 더 깊게 알 수 있었다.
