@@ -25,7 +25,13 @@
 > - [java11](./2021_10/java11.md)
 > - [Collection_궁금해결](./2021_11/Collection_궁금해결.md)
 > - [자바프로그램_실행과정](./2021_11/자바프로그램_실행과정.md)
+> - [HttpSession_테스트(MockHttpSession)](./2021_11/HttpSession_테스트(MockHttpSession).md)
+> - [java.lang_패키지](./2021_11/java.lang_패키지.md)
+> - [서블릿](./2021_11/서블릿.md)
 > - [제네릭(generic)](./2021_12/제네릭(generic).md)
+
+
+
 
 
 ## **Spring**
@@ -44,7 +50,8 @@
 > - [Resource_추상화](./2021_11/Resource_추상화.md)
 > - [Validation_추상화](./2021_11/Validation_추상화.md)
 > - [데이터바인딩추상화Converter와Formatter](./2021_11/데이터바인딩추상화Converter와Formatter.md)
-
+> - [Null-safety](./2021_11/Null-safety.md)
+> - [Spring_boot의_AutoConfiguration](./2021_11/Spring_boot의_AutoConfiguration.md)
 
 ## **자유로운 오늘 질문**
 > - [질문_2021_10_05](./2021_10/질문_2021_10_05.md)
@@ -52,5 +59,7 @@
 > - [SpringAOP질문_2021_10_20](./2021_10/SpringAOP질문_2021_10_20.md)
 > - [Restful_API_초읽기](./2021_11/Restful_API_초읽기.md)
 > - [2021-11-30_더_알아보기](./2021_11/2021-11-30_더_알아보기.md)
-
+> - [Redis와_Memcached의_차이](./2021_11/Redis와_Memcached의_차이.md)
+> - [Scale-up&Scale-out](./2021_11/Scale-up&Scale-out.md)
+> - [maven와gradle차이](./2021_11/maven와gradle차이.md)
 
