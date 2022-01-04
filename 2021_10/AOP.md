@@ -16,7 +16,7 @@
 
 - **AOP(Aspect Oriented Programming)란** 
 
-  **AOP는 새로운 프로그래밍 패러다임이 아니라 OOP(Object Oriented Programming, 객체 지향 프로그래밍)를 돕는 보조적인 기술로, 핵심적인 관심 사항(Core Concern)과 공통 관심 사항(Cross-Cutting Concern)으로 분리시키고 각각을 모듈화 하는 것을 의미한다.**
+  **AOP는 새로운 프로그래밍 패러다임이 아니라 OOP(Object Oriented Programming, 객체 지향 프로그래밍)를 돕는 보완적인 기술로, 핵심적인 관심 사항(Core Concern)과 공통 관심 사항(Cross-Cutting Concern)으로 분리시키고 각각을 모듈화 하는 것을 의미한다.**
   <br>
 
 -  **스프링 DI는  의존성에 대한 주입, 스프링AOP는 로직(code) 주입**
