@@ -21,10 +21,6 @@ spring.datasource.password=
 
 너무 수상해서 왜 그런지 찾아보니 Spring boot의 **AutoConfiguration 기능** 덕분이 었다.
 
-> 나의질문 : 그러면 애초에 application.properties 파일에 DB정보를 입력할 필요가 없는 건가?
->
-> ??????????
-
 <br>
 
 <br>
