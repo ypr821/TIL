@@ -52,7 +52,8 @@
 > - [데이터바인딩추상화Converter와Formatter](./2021_11/데이터바인딩추상화Converter와Formatter.md)
 > - [Null-safety](./2021_11/Null-safety.md)
 > - [Spring_boot의_AutoConfiguration](./2021_11/Spring_boot의_AutoConfiguration.md)
-
+> - [@RequiredArgsConstructor](./2022_01/%40RequiredArgsConstructor.md)
+> 
 ## **자유로운 오늘 질문**
 > - [질문_2021_10_05](./2021_10/질문_2021_10_05.md)
 > - [질문_2021_10_12](./2021_10/질문_2021_10_12.md)
@@ -62,4 +63,8 @@
 > - [Redis와_Memcached의_차이](./2021_11/Redis와_Memcached의_차이.md)
 > - [Scale-up&Scale-out](./2021_11/Scale-up&Scale-out.md)
 > - [maven와gradle차이](./2021_11/maven와gradle차이.md)
+> - [트랜잭션의_격리수준(isolation Level)](./2022_01/트랜잭션의_격리수준(isolation%20Level).md)
+
+
+
 
