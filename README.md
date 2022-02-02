@@ -64,7 +64,7 @@
 > - [Scale-up&Scale-out](./2021_11/Scale-up&Scale-out.md)
 > - [maven와gradle차이](./2021_11/maven와gradle차이.md)
 > - [트랜잭션의_격리수준(isolation Level)](./2022_01/트랜잭션의_격리수준(isolation%20Level).md)
-
-
+> - [인증(Authentication)과_인가(Authorization)](./2022_01/인증(Authentication)과_인가(Authorization).md)
+> - [JWT(JSON Web Token)](./2022_01/JWT(JSON Web Token).md)
 
 
