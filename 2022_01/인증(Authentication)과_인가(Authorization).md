@@ -125,4 +125,4 @@ https://dev.to/caffiendkitten/authentication-vs-authorization-25lc
 ## **JWT(JSON Web Token)**
 
 - 인증에 필요한 정보를 암호화시킨 토큰을 의미한다.
-- https://github.com/ypr821/TIL/blob/main/2022_01/JWT.md 에 자세하게 정리해둠.
+- [JWT을 공부한 TIL ](https://github.com/ypr821/TIL/blob/main/2022_01/JWT(JSON%20Web%20Token).md) 에 자세하게 정리해둠.
