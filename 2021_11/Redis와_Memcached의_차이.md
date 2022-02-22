@@ -35,6 +35,8 @@
      Redis는 데이터를 Disk에도 저장하기 때문에 메모리에서 유실된 데이터를 복구할 수 있습니다. 
      다만, 메모리는 별도의  설정이 필요하다
 
+3.  Single Thread를 사용하기 때문에 scale out 하였을때 thread safe 할 수 있다.
+
  <br><br>
 
 ## **Memcached** 
