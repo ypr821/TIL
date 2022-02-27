@@ -21,3 +21,5 @@
 스프링 MVC 핸들러 메소드 아규먼트에 사용할 수 있으며 validation group이라는 힌트를 사용할 수 있다. <br>
 @Valid 애노테이션에는 그룹을 지정할 방법이 없다. <br>
 @Validated는 스프링이 제공하는 애노테이션으로 그룹 클래스를 설정할 수 있다. <br>
+
+https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/validation/annotation/Validated.html
