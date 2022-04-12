@@ -62,13 +62,13 @@ AWS Region중에 복수의 가용영역이 있음. 가용영역은 물리적으�
 
 <br>
 
-### Public subnet
+### Public Subnet
 
 Internet Gateway 가 연결되어 있는 subnet 을 public subnet 이라 한다.
 
 <br>
 
-### Private subnet
+### Private Subnet
 
 Internet Gateway 가 연결되지 않는 subnet 을 private subnet 이라 한다.
 
@@ -83,6 +83,19 @@ Internet Gateway 가 연결되지 않는 subnet 을 private subnet 이라 한다
 
 <br>
 
+### VPC 피어링 연결 (Peering Connection)
+VPC 피어링 연결은 두 VPC 간에 트래픽을 비공개로 라우팅할 수 있게 하는 두 VPC 간의 네트워킹 연결입니다.
+
+### NAT 게이트웨이
+NAT(네트워크 주소 변환) 게이트웨이를 사용해 프라이빗 서브넷의 인스턴스를 활성화하여 인터넷 또는 다른 AWS 서비스에 연결할 수 있지만, 인터넷에서 해당 인스턴스와의 연결을 시작하지 못할 수 있습니다.
+
+퍼블릭 NAT 게이트웨이를 사용하면 프라이빗 서브넷의 인스턴스가 인터넷에 연결할 수 있지만 인터넷에서 원치 않는 인바운드 연결은 수신되지 않습니다. 탄력적 IP 주소를 퍼블릭 NAT 게이트웨이와 연결하고 인터넷 게이트웨이를 탄력적 IP 주소가 포함된 VPC에 연결해야 합니다.
+
+프라이빗 NAT 게이트웨이를 사용하면 프라이빗 서브넷의 인스턴스가 다른 VPC 또는 온프레미스 네트워크에 연결할 수 있지만 VPC 외부에서 원치 않는 인바운드 연결은 수신되지 않습니다. NAT 게이트웨이에서 전송 게이트웨이 또는 가상 프라이빗 게이트웨이를 통해 트래픽을 라우팅할 수 있습니다.
+
+
+
+<br>
 
 참고. : CIDR은 결국 IP주소 할당 방법
 
