@@ -13,14 +13,14 @@
 - JPQL 쿼리 실행  :  플러시 자동 호출 
     왜 자동으로 호출 될까? 앞서 
 
-'''java 
+```java 
             em.persist(memberA);
             em.persist(memberB);
             
             //중간에 JPQL 실행
             query = em.createQuery("select m from Member m",Member.class);
             List<Member> members = query.getResultList();
-'''
+```
 
 
 
