@@ -19,6 +19,8 @@
 > - [객체_지향_설계_5원칙(SOLID)](./2021_10/객체_지향_설계_5원칙(SOLID).md)
 > - [디자인 패턴](./2021_10/디자인_패턴.md)
 
+<br><br>
+
 ## **Java**
 > - [자바가 확장한 객체 지향](./2021_10/자바가_확장한_객체지향.md)
 > - [GC (Garbage Collection)](./2021_10/GC(Garbage_Collection).md)
@@ -31,7 +33,7 @@
 > - [제네릭(generic)](./2021_12/제네릭(generic).md)
 
 
-
+<br>
 
 
 ## **Spring**
@@ -53,7 +55,15 @@
 > - [Null-safety](./2021_11/Null-safety.md)
 > - [Spring_boot의_AutoConfiguration](./2021_11/Spring_boot의_AutoConfiguration.md)
 > - [@RequiredArgsConstructor](./2022_01/%40RequiredArgsConstructor.md)
-> 
+
+
+<br><br>
+## **JPA**
+
+
+
+<br><br>
+
 ## **자유로운 오늘 질문**
 > - [질문_2021_10_05](./2021_10/질문_2021_10_05.md)
 > - [질문_2021_10_12](./2021_10/질문_2021_10_12.md)
