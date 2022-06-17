@@ -1,10 +1,10 @@
 
-1. @Valid와 @Validated
+# 1. @Valid와 @Validated
 
 https://mangkyu.tistory.com/174
 
 
-2. 다양한 제약조건 어노테이션
+# 2. 다양한 제약조건 어노테이션
 JSR 표준 스펙은 다양한 제약 조건 어노테이션을 제공하고 있는데, 대표적인 어노테이션으로는 다음과 같은 것들이 있다.
 
 @NotNull: 해당 값이 null이 아닌지 검증함
@@ -19,8 +19,8 @@ JSR 표준 스펙은 다양한 제약 조건 어노테이션을 제공하고 있
 출처: https://mangkyu.tistory.com/174 [MangKyu's Diary:티스토리]
 
 
-3. 실제 프로젝트 적용
+# 3. 실제 프로젝트 적용
   DTO에서 @NotBlank 로 유효성 체크를 하도록하고 Controller 메소드 파라미터에 @Valid를 붙여서 불 충족시 BadRequestException이 발생하도록 하였다. 
   
-4. 왜 사용했는가 
+# 4. 왜 사용했는가 
   하나하나 if문으로 null 체크, 공백 체크해주는 코드를 줄일 수 있어서 편하고 유용하다.
